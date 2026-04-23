@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Participant Waiver — Convert Scavenger Hunt | Experimentation Elite 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #5B2D8E;
+    --purple-dark: #3D1A6B;
+    --purple-mid: #7B4AB2;
+    --purple-light: #EDE7F6;
+    --purple-xlight: #F7F3FC;
+    --accent: #B084F0;
+    --text: #1A1A2E;
+    --text-muted: #6B6B80;
+    --text-light: #9999AA;
+    --border: #E0D8F0;
+    --bg: #FAFAF8;
+    --white: #FFFFFF;
+    --error: #C0392B;
+    --success: #1E7E5E;
+    --success-bg: #EAFAF4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Hero header */
+  .hero {
+    background: var(--purple-dark);
+    background-image: radial-gradient(ellipse at 70% 0%, #7B2FBE 0%, transparent 60%),
+                      radial-gradient(ellipse at 10% 100%, #3D1A6B 0%, transparent 60%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero-logo span { color: var(--accent); }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    letter-spacing: 0.02em;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 16px;
+    position: relative;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #7BF2C8; display: inline-block; }
+
+  /* Main layout */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* Intro notice */
+  .notice {
+    background: var(--purple-xlight);
+    border-left: 3px solid var(--purple-mid);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 28px 0 32px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .notice strong { color: var(--purple-dark); }
+
+  /* Form sections */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .section-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--purple);
+  }
+  .section-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Form fields */
+  .field-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .field-grid.two-col { grid-template-columns: 1fr 1fr; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  label {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+  label .req { color: var(--error); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--purple-mid);
+    box-shadow: 0 0 0 3px rgba(123,74,178,0.12);
+  }
+  input.error, select.error, textarea.error {
+    border-color: var(--error);
+  }
+  .field-error {
+    font-size: 11.5px;
+    color: var(--error);
+    display: none;
+  }
+  .field-error.show { display: block; }
+
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B80' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  /* Waiver text block */
+  .waiver-box {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    max-height: 280px;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    scroll-behavior: smooth;
+  }
+  .waiver-box::-webkit-scrollbar { width: 5px; }
+  .waiver-box::-webkit-scrollbar-track { background: var(--purple-xlight); border-radius: 4px; }
+  .waiver-box::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+  .waiver-box h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--purple);
+    margin: 16px 0 6px;
+  }
+  .waiver-box h4:first-child { margin-top: 0; }
+  .waiver-box p { margin-bottom: 10px; }
+  .waiver-box ul { padding-left: 18px; margin-bottom: 10px; }
+  .waiver-box ul li { margin-bottom: 4px; }
+  .waiver-box strong { color: var(--text); }
+
+  .scroll-indicator {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-light);
+    margin-top: 8px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .scroll-arrow { font-size: 14px; color: var(--purple-mid); animation: bounce 1.5s infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+
+  /* Checkboxes */
+  .check-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .check-item:hover { border-color: var(--purple-mid); background: var(--purple-xlight); }
+  .check-item.checked { border-color: var(--purple-mid); background: var(--purple-xlight); }
+  .check-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: var(--white);
+    position: relative;
+    transition: all 0.15s;
+    padding: 0;
+    margin-top: 1px;
+  }
+  .check-item input[type="checkbox"]:checked {
+    background: var(--purple);
+    border-color: var(--purple);
+  }
+  .check-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 5px;
+    width: 5px; height: 9px;
+    border: 2px solid white;
+    border-top: none; border-left: none;
+    transform: rotate(45deg);
+  }
+  .check-item input[type="checkbox"]:focus { box-shadow: 0 0 0 3px rgba(123,74,178,0.15); }
+  .check-label {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .check-label em { color: var(--text-muted); font-style: normal; font-size: 12.5px; display: block; margin-top: 2px; }
+
+  /* Health radio */
+  .radio-group {
+    display: flex;
+    gap: 12px;
+  }
+  .radio-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13.5px;
+    transition: border-color 0.15s;
+  }
+  .radio-item input { width: auto; padding: 0; border: none; box-shadow: none; accent-color: var(--purple); }
+  .radio-item:has(input:checked) { border-color: var(--purple-mid); background: var(--purple-xlight); }
+
+  /* Signature canvas */
+  .sig-wrap {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--white);
+    position: relative;
+  }
+  .sig-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13px;
+    color: var(--text-light);
+    pointer-events: none;
+    transition: opacity 0.2s;
+    text-align: center;
+    line-height: 1.5;
+  }
+  canvas#sig {
+    display: block;
+    width: 100%;
+    height: 130px;
+    cursor: crosshair;
+    touch-action: none;
+  }
+  .sig-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 6px 10px;
+    border-top: 1px solid var(--border);
+    background: var(--purple-xlight);
+  }
+  .btn-clear {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .btn-clear:hover { color: var(--purple); background: var(--purple-light); }
+
+  /* Submit */
+  .submit-area {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--purple);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 48px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.02em;
+    width: 100%;
+    max-width: 360px;
+  }
+  .btn-submit:hover { background: var(--purple-dark); }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .submit-note {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 12px;
+  }
+
+  /* Success screen */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--success-bg);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .success-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .success-screen p {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .success-ref {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--purple-xlight);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  /* Error summary */
+  .error-summary {
+    display: none;
+    background: #FDF2F2;
+    border: 1.5px solid #F5C6C6;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--error);
+    text-align: left;
+  }
+  .error-summary.show { display: block; }
+
+  @media (max-width: 520px) {
+    .field-grid.two-col { grid-template-columns: 1fr; }
+    .radio-group { flex-direction: column; }
+    .hero { padding: 36px 16px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo"><span>Convert.com</span> &nbsp;×&nbsp; Experimentation Elite</div>
+  <h1>Participant Liability Waiver</h1>
+  <div class="hero-sub">Scavenger Hunt · Space Academy · 7 May 2026</div>
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Please complete before the activity begins
+  </div>
+</div>
+
+<div class="container">
+  <div class="notice">
+    <strong>Before you join the hunt:</strong> Please read this waiver carefully and complete all fields. Your submission confirms that you understand and accept the terms. This should take about 2 minutes.
+  </div>
+
+  <div id="form-view">
+    <form id="waiver-form" novalidate>
+
+      <!-- 1. Participant info -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">1</div>
+          <div class="section-title">Your information</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="field-grid two-col">
+          <div class="field">
+            <label for="fname">First name <span class="req">*</span></label>
+            <input type="text" id="fname" name="fname" autocomplete="given-name" placeholder="Ada">
+            <span class="field-error" id="fname-err">Required</span>
+          </div>
+          <div class="field">
+            <label for="lname">Last name <span class="req">*</span></label>
+            <input type="text" id="lname" name="lname" autocomplete="family-name" placeholder="Lovelace">
+            <span class="field-error" id="lname-err">Required</span>
+          </div>
+        </div>
+        <div class="field-grid two-col" style="margin-top:16px">
+          <div class="field">
+            <label for="email">Email address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="ada@company.com">
+            <span class="field-error" id="email-err">Enter a valid email</span>
+          </div>
+          <div class="field">
+            <label for="company">Company / Organisation</label>
+            <input type="text" id="company" name="company" autocomplete="organization" placeholder="Acme Corp">
+          </div>
+        </div>
+        <div class="field-grid two-col" style="margin-top:16px">
+          <div class="field">
+            <label for="badge">Badge / registration number</label>
+            <input type="text" id="badge" name="badge" placeholder="e.g. EE-2026-0412">
+          </div>
+          <div class="field">
+            <label for="dob">Date of birth <span class="req">*</span></label>
+            <input type="date" id="dob" name="dob">
+            <span class="field-error" id="dob-err">Required — participants must be 18+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Emergency contact -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">2</div>
+          <div class="section-title">Emergency contact</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="field-grid two-col">
+          <div class="field">
+            <label for="ec-name">Contact name <span class="req">*</span></label>
+            <input type="text" id="ec-name" name="ec-name" placeholder="Full name">
+            <span class="field-error" id="ec-name-err">Required</span>
+          </div>
+          <div class="field">
+            <label for="ec-rel">Relationship <span class="req">*</span></label>
+            <select id="ec-rel" name="ec-rel">
+              <option value="">Select…</option>
+              <option>Spouse / Partner</option>
+              <option>Parent</option>
+              <option>Sibling</option>
+              <option>Friend</option>
+              <option>Colleague</option>
+              <option>Other</option>
+            </select>
+            <span class="field-error" id="ec-rel-err">Required</span>
+          </div>
+        </div>
+        <div class="field-grid" style="margin-top:16px">
+          <div class="field">
+            <label for="ec-phone">Contact phone number <span class="req">*</span></label>
+            <input type="tel" id="ec-phone" name="ec-phone" autocomplete="tel" placeholder="+1 555 000 0000">
+            <span class="field-error" id="ec-phone-err">Required</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Health declaration -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">3</div>
+          <div class="section-title">Health declaration</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="field" style="margin-bottom:16px">
+          <label>Do you have any medical conditions or physical limitations that could affect your safe participation? <span class="req">*</span></label>
+          <div class="radio-group" style="margin-top:8px">
+            <label class="radio-item">
+              <input type="radio" name="health" value="no" required> No, I am in good health and able to participate fully
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="health" value="yes"> Yes — I will describe below
+            </label>
+          </div>
+          <span class="field-error" id="health-err">Please select an option</span>
+        </div>
+        <div class="field" id="health-notes-field" style="display:none">
+          <label for="health-notes">Please describe any relevant conditions or limitations</label>
+          <textarea id="health-notes" name="health-notes" placeholder="Optional but appreciated — this helps our staff support you during the activity."></textarea>
+        </div>
+      </div>
+
+      <!-- 4. Waiver & release -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">4</div>
+          <div class="section-title">Waiver &amp; release</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="waiver-box" id="waiver-text">
+          <h4>Activity description</h4>
+          <p>The Scavenger Hunt ("Activity") is a team-based event held throughout the designated venue at Experimentation Elite: Space Academy on <strong>7 May 2026</strong>, sponsored by Convert.com ("Convert"). Participants will navigate indoor and outdoor areas of the event space, complete challenges, interact with installations and props, collaborate with other attendees, and may be photographed, filmed, or recorded as part of the event experience.</p>
+
+          <h4>Scope of activity</h4>
+          <p>Participation in this Activity may involve:</p>
+          <ul>
+            <li><strong>Physical movement</strong> — walking, navigating stairs, crouching, and moving through varied event spaces;</li>
+            <li><strong>Team challenges</strong> — completing puzzles, tasks, and interactive stations throughout the venue;</li>
+            <li><strong>Photography &amp; recording</strong> — you may be captured in photos, videos, or live streams produced by Convert, Experimentation Elite organisers, or other attendees;</li>
+            <li><strong>Data collection</strong> — submission of your name, email, and participation data for event administration, communications, and Convert's legitimate business interests. Convert handles all personal data in accordance with applicable data protection law.</li>
+          </ul>
+
+          <h4>Assumption of risk</h4>
+          <p>I acknowledge that participation in the Activity involves inherent risks, including but not limited to: physical injury from movement through the event space (slipping, tripping, falling, collision); exertion-related discomfort, particularly for those with pre-existing medical conditions; and minor property damage incidental to challenge activities. I voluntarily and knowingly assume all such risks.</p>
+
+          <h4>Release of liability</h4>
+          <p>In consideration of being permitted to participate, I — on behalf of myself, my heirs, executors, and assigns — <strong>release, waive, and discharge Convert.com, its officers, employees, agents, partners, and venue providers</strong> from any and all claims, demands, actions, or causes of action arising out of or related to any injury, damage, or loss I may sustain during the Activity, including those caused by the ordinary negligence of the released parties.</p>
+
+          <h4>Media &amp; image consent</h4>
+          <p>I grant Convert.com irrevocable permission to use photographs, video recordings, and other media captured during the Activity for promotional, editorial, and marketing purposes, including on Convert's website and social media channels, without compensation and without further notice.</p>
+
+          <h4>Data use consent</h4>
+          <p>I consent to Convert collecting, storing, and processing my personal information submitted via this form for the purposes of event administration, participant safety, and Convert's marketing communications. I understand I may withdraw consent for marketing communications at any time. Convert will not sell my personal data to third parties.</p>
+
+          <h4>Participant conduct</h4>
+          <p>I agree to follow all instructions from Convert and event staff, remain within designated activity zones, cease participation immediately if I feel unsafe or unwell, and report any hazards or incidents to a staff member promptly.</p>
+
+          <h4>Governing law</h4>
+          <p>This waiver shall be governed by the laws of the jurisdiction in which the event is held. If any provision is held unenforceable, the remaining provisions continue in full force.</p>
+        </div>
+        <div class="scroll-indicator" id="scroll-hint">
+          <span class="scroll-arrow">↓</span> Scroll to read full waiver
+        </div>
+      </div>
+
+      <!-- 5. Acknowledgements -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">5</div>
+          <div class="section-title">Acknowledgements</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="field-grid" style="gap:10px">
+
+          <label class="check-item" id="ack1-wrap">
+            <input type="checkbox" id="ack1" name="ack1" required>
+            <div class="check-label">
+              I have read the full waiver above and agree to its terms.
+              <em>Assumption of risk &amp; release of liability</em>
+            </div>
+          </label>
+
+          <label class="check-item" id="ack2-wrap">
+            <input type="checkbox" id="ack2" name="ack2" required>
+            <div class="check-label">
+              I consent to being photographed, filmed, or recorded during the Activity, and grant Convert.com permission to use such media for promotional purposes.
+              <em>Media &amp; image consent</em>
+            </div>
+          </label>
+
+          <label class="check-item" id="ack3-wrap">
+            <input type="checkbox" id="ack3" name="ack3" required>
+            <div class="check-label">
+              I consent to Convert collecting and processing my personal data as described in the waiver.
+              <em>Data collection &amp; use</em>
+            </div>
+          </label>
+
+          <label class="check-item" id="ack4-wrap">
+            <input type="checkbox" id="ack4" name="ack4" required>
+            <div class="check-label">
+              I confirm I am 18 years of age or older, and I am signing this waiver freely, without duress.
+              <em>Age &amp; voluntary consent</em>
+            </div>
+          </label>
+
+        </div>
+        <span class="field-error" id="ack-err" style="margin-top:8px; display:none">All acknowledgements must be checked to proceed</span>
+      </div>
+
+      <!-- 6. Signature -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">6</div>
+          <div class="section-title">Signature</div>
+          <div class="section-divider"></div>
+        </div>
+        <div class="field" style="margin-bottom:16px">
+          <label>Draw your signature below <span class="req">*</span></label>
+          <div class="sig-wrap">
+            <canvas id="sig" width="640" height="130"></canvas>
+            <div class="sig-hint" id="sig-hint">Sign here with your mouse or finger</div>
+            <div class="sig-actions">
+              <button type="button" class="btn-clear" id="sig-clear">Clear signature</button>
+            </div>
+          </div>
+          <span class="field-error" id="sig-err">Please provide your signature</span>
+        </div>
+        <div class="field-grid two-col">
+          <div class="field">
+            <label for="print-name">Full name (print) <span class="req">*</span></label>
+            <input type="text" id="print-name" name="print-name" placeholder="Ada Lovelace">
+            <span class="field-error" id="print-name-err">Required</span>
+          </div>
+          <div class="field">
+            <label for="sign-date">Date <span class="req">*</span></label>
+            <input type="date" id="sign-date" name="sign-date">
+            <span class="field-error" id="sign-date-err">Required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-area">
+        <button type="submit" class="btn-submit" id="submit-btn">
+          Submit waiver
+        </button>
+        <div class="submit-note">Your submission is securely recorded. You will not need to print anything.</div>
+        <div class="error-summary" id="error-summary">Please review the highlighted fields above before submitting.</div>
+      </div>
+
+    </form>
+  </div><!-- /form-view -->
+
+  <!-- Success screen -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✓</div>
+    <h2>You're all set!</h2>
+    <p>Your waiver has been submitted. Head to the Scavenger Hunt registration desk — a Convert team member will check you in.</p>
+    <div class="success-ref" id="success-ref"></div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('sign-date').value = today;
+document.getElementById('sign-date').max = today;
+
+// Health radio toggle
+document.querySelectorAll('input[name="health"]').forEach(r => {
+  r.addEventListener('change', () => {
+    document.getElementById('health-notes-field').style.display =
+      document.querySelector('input[name="health"]:checked')?.value === 'yes' ? 'block' : 'none';
+  });
+});
+
+// Checkbox style toggle
+document.querySelectorAll('.check-item input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.check-item').classList.toggle('checked', cb.checked);
+  });
+});
+
+// Scroll hint hide
+const waiverBox = document.getElementById('waiver-text');
+waiverBox.addEventListener('scroll', () => {
+  if (waiverBox.scrollTop > 40) document.getElementById('scroll-hint').style.opacity = '0';
+}, { passive: true });
+
+// Signature canvas
+const canvas = document.getElementById('sig');
+const ctx = canvas.getContext('2d');
+let drawing = false, hasSig = false;
+
+function getPos(e) {
+  const r = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / r.width;
+  const scaleY = canvas.height / r.height;
+  if (e.touches) {
+    return { x: (e.touches[0].clientX - r.left) * scaleX, y: (e.touches[0].clientY - r.top) * scaleY };
+  }
+  return { x: (e.clientX - r.left) * scaleX, y: (e.clientY - r.top) * scaleY };
+}
+
+function startDraw(e) {
+  drawing = true;
+  const p = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(p.x, p.y);
+  e.preventDefault();
+}
+function draw(e) {
+  if (!drawing) return;
+  const p = getPos(e);
+  ctx.lineTo(p.x, p.y);
+  ctx.strokeStyle = '#2D1B5A';
+  ctx.lineWidth = 2.2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+  if (!hasSig) {
+    hasSig = true;
+    document.getElementById('sig-hint').style.opacity = '0';
+  }
+  e.preventDefault();
+}
+function stopDraw() { drawing = false; ctx.beginPath(); }
+
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDraw);
+canvas.addEventListener('mouseleave', stopDraw);
+canvas.addEventListener('touchstart', startDraw, { passive: false });
+canvas.addEventListener('touchmove', draw, { passive: false });
+canvas.addEventListener('touchend', stopDraw);
+
+document.getElementById('sig-clear').addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hasSig = false;
+  document.getElementById('sig-hint').style.opacity = '1';
+});
+
+// Validation helpers
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = msg || el.textContent; el.classList.add('show'); }
+}
+function clearErr(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('show');
+}
+function markInput(id, bad) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('error', bad);
+}
+
+// Age check
+function calcAge(dob) {
+  const b = new Date(dob), now = new Date();
+  let age = now.getFullYear() - b.getFullYear();
+  const m = now.getMonth() - b.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < b.getDate())) age--;
+  return age;
+}
+
+// Form submit
+document.getElementById('waiver-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let valid = true;
+
+  const fields = [
+    ['fname', 'First name is required'],
+    ['lname', 'Last name is required'],
+    ['ec-name', 'Emergency contact name is required'],
+    ['ec-phone', 'Emergency contact phone is required'],
+    ['print-name', 'Please print your full name'],
+    ['sign-date', 'Date is required'],
+  ];
+
+  fields.forEach(([id, msg]) => {
+    const val = document.getElementById(id).value.trim();
+    if (!val) { showErr(id + '-err', msg); markInput(id, true); valid = false; }
+    else { clearErr(id + '-err'); markInput(id, false); }
+  });
+
+  // Email
+  const email = document.getElementById('email').value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showErr('email-err', 'Please enter a valid email address'); markInput('email', true); valid = false;
+  } else { clearErr('email-err'); markInput('email', false); }
+
+  // DOB + age
+  const dob = document.getElementById('dob').value;
+  if (!dob) { showErr('dob-err', 'Date of birth is required'); markInput('dob', true); valid = false; }
+  else if (calcAge(dob) < 18) { showErr('dob-err', 'Participants must be 18 or older'); markInput('dob', true); valid = false; }
+  else { clearErr('dob-err'); markInput('dob', false); }
+
+  // Emergency contact relationship
+  const ecRel = document.getElementById('ec-rel').value;
+  if (!ecRel) { showErr('ec-rel-err', 'Please select a relationship'); markInput('ec-rel', true); valid = false; }
+  else { clearErr('ec-rel-err'); markInput('ec-rel', false); }
+
+  // Health
+  const health = document.querySelector('input[name="health"]:checked');
+  if (!health) { showErr('health-err', 'Please indicate your health status'); valid = false; }
+  else clearErr('health-err');
+
+  // Checkboxes
+  const acks = ['ack1','ack2','ack3','ack4'];
+  const allAcked = acks.every(id => document.getElementById(id).checked);
+  if (!allAcked) { document.getElementById('ack-err').classList.add('show'); valid = false; }
+  else document.getElementById('ack-err').classList.remove('show');
+
+  // Signature
+  if (!hasSig) { showErr('sig-err', 'Please provide your signature'); valid = false; }
+  else clearErr('sig-err');
+
+  if (!valid) {
+    document.getElementById('error-summary').classList.add('show');
+    document.querySelector('.error, .field-error.show')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  document.getElementById('error-summary').classList.remove('show');
+
+  // Simulate submission
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  setTimeout(() => {
+    document.getElementById('form-view').style.display = 'none';
+    const success = document.getElementById('success-screen');
+    success.style.display = 'block';
+    const ref = 'WVR-EE26-' + Math.random().toString(36).toUpperCase().slice(2, 8);
+    document.getElementById('success-ref').textContent = 'Reference: ' + ref;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 900);
+});
+</script>
+</body>
+</html>
