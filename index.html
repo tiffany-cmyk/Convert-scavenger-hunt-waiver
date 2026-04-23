@@ -534,71 +534,50 @@
         </div>
       </div>
 
-      <!-- 2. Emergency contact -->
+      <!-- 2. Health declaration -->
       <div class="section">
         <div class="section-label">
           <div class="section-num">2</div>
-          <div class="section-title">Emergency contact</div>
-          <div class="section-divider"></div>
-        </div>
-        <div class="field-grid two-col">
-          <div class="field">
-            <label for="ec-name">Contact name <span class="req">*</span></label>
-            <input type="text" id="ec-name" name="ec-name" placeholder="Full name">
-            <span class="field-error" id="ec-name-err">Required</span>
-          </div>
-          <div class="field">
-            <label for="ec-rel">Relationship <span class="req">*</span></label>
-            <select id="ec-rel" name="ec-rel">
-              <option value="">Select…</option>
-              <option>Spouse / Partner</option>
-              <option>Parent</option>
-              <option>Sibling</option>
-              <option>Friend</option>
-              <option>Colleague</option>
-              <option>Other</option>
-            </select>
-            <span class="field-error" id="ec-rel-err">Required</span>
-          </div>
-        </div>
-        <div class="field-grid" style="margin-top:16px">
-          <div class="field">
-            <label for="ec-phone">Contact phone number <span class="req">*</span></label>
-            <input type="tel" id="ec-phone" name="ec-phone" autocomplete="tel" placeholder="+1 555 000 0000">
-            <span class="field-error" id="ec-phone-err">Required</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Health declaration -->
-      <div class="section">
-        <div class="section-label">
-          <div class="section-num">3</div>
           <div class="section-title">Health declaration</div>
           <div class="section-divider"></div>
         </div>
         <div class="field" style="margin-bottom:16px">
-          <label>Do you have any medical conditions or physical limitations that could affect your safe participation? <span class="req">*</span></label>
+          <label>Please indicate your health status for this activity <span class="req">*</span></label>
           <div class="radio-group" style="margin-top:8px">
             <label class="radio-item">
               <input type="radio" name="health" value="no" required> No, I am in good health and able to participate fully
             </label>
             <label class="radio-item">
-              <input type="radio" name="health" value="yes"> Yes — I will describe below
+              <input type="radio" name="health" value="yes"> Yes — the following applies to me
             </label>
           </div>
           <span class="field-error" id="health-err">Please select an option</span>
         </div>
-        <div class="field" id="health-notes-field" style="display:none">
-          <label for="health-notes">Please describe any relevant conditions or limitations</label>
-          <textarea id="health-notes" name="health-notes" placeholder="Optional but appreciated — this helps our staff support you during the activity."></textarea>
+        <div id="health-notes-field" style="display:none; margin-top:12px">
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Two of the scavenger hunt quests involve smelling and tasting. Please check any that apply:</p>
+          <div class="field-grid" style="gap:10px">
+            <label class="check-item" id="health-smell-wrap">
+              <input type="checkbox" id="health-smell" name="health_smell">
+              <div class="check-label">
+                I have sensitive or inflamed sinuses / allergies to certain essential oils and will not be smelling them.
+                <em>Scent quest exemption</em>
+              </div>
+            </label>
+            <label class="check-item" id="health-taste-wrap">
+              <input type="checkbox" id="health-taste" name="health_taste">
+              <div class="check-label">
+                I have food allergies or dietary restrictions and will not be tasting certain items.
+                <em>Taste quest exemption</em>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
 
-      <!-- 4. Waiver & release -->
+      <!-- 3. Waiver & release -->
       <div class="section">
         <div class="section-label">
-          <div class="section-num">4</div>
+          <div class="section-num">3</div>
           <div class="section-title">Waiver &amp; release</div>
           <div class="section-divider"></div>
         </div>
@@ -638,6 +617,32 @@
         </div>
       </div>
 
+      <!-- 4. Tree certificate -->
+      <div class="section">
+        <div class="section-label">
+          <div class="section-num">4</div>
+          <div class="section-title">Your tree certificate</div>
+          <div class="section-divider"></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--text-muted);margin-bottom:14px;line-height:1.6">Convert is planting <strong style="color:var(--text)">10 trees</strong> for every participant in this scavenger hunt. Would you like a certificate in your name?</p>
+        <div class="field-grid" style="gap:10px">
+          <label class="check-item" id="tree-wrap">
+            <input type="checkbox" id="tree-cert" name="tree_cert">
+            <div class="check-label">
+              Yes, I would like my certificate for 10 trees planted in my name.
+              <em>We'll email it to you after the event</em>
+            </div>
+          </label>
+        </div>
+        <div id="tree-email-field" style="display:none; margin-top:14px">
+          <div class="field">
+            <label for="tree-email">Email address for your certificate <span class="req">*</span></label>
+            <input type="email" id="tree-email" name="tree_email" autocomplete="email" placeholder="ada@company.com">
+            <span class="field-error" id="tree-email-err">Please enter a valid email address</span>
+          </div>
+        </div>
+      </div>
+
       <!-- 5. Acknowledgements -->
       <div class="section">
         <div class="section-label">
@@ -663,24 +668,8 @@
             </div>
           </label>
 
-          <label class="check-item" id="ack3-wrap">
-            <input type="checkbox" id="ack3" name="ack3" required>
-            <div class="check-label">
-              I consent to Convert collecting and processing my personal data as described in the waiver.
-              <em>Data collection &amp; use</em>
-            </div>
-          </label>
-
-          <label class="check-item" id="ack4-wrap">
-            <input type="checkbox" id="ack4" name="ack4" required>
-            <div class="check-label">
-              I confirm I am 18 years of age or older, and I am signing this waiver freely, without duress.
-              <em>Age &amp; voluntary consent</em>
-            </div>
-          </label>
-
         </div>
-        <span class="field-error" id="ack-err" style="margin-top:8px; display:none">All acknowledgements must be checked to proceed</span>
+        <span class="field-error" id="ack-err" style="margin-top:8px; display:none">Both acknowledgements must be checked to proceed</span>
       </div>
 
       <!-- 6. Signature -->
@@ -701,17 +690,9 @@
           </div>
           <span class="field-error" id="sig-err">Please provide your signature</span>
         </div>
-        <div class="field-grid two-col">
-          <div class="field">
-            <label for="print-name">Full name (print) <span class="req">*</span></label>
-            <input type="text" id="print-name" name="print-name" placeholder="Ada Lovelace">
-            <span class="field-error" id="print-name-err">Required</span>
-          </div>
-          <div class="field">
-            <label for="sign-date">Date <span class="req">*</span></label>
-            <input type="date" id="sign-date" name="sign-date">
-            <span class="field-error" id="sign-date-err">Required</span>
-          </div>
+        <div class="field" style="margin-top:8px">
+          <label>Date</label>
+          <input type="date" id="sign-date" name="sign-date" style="max-width:200px" readonly>
         </div>
       </div>
 
@@ -747,6 +728,12 @@ document.querySelectorAll('input[name="health"]').forEach(r => {
     document.getElementById('health-notes-field').style.display =
       document.querySelector('input[name="health"]:checked')?.value === 'yes' ? 'block' : 'none';
   });
+});
+
+// Tree cert toggle
+document.getElementById('tree-cert').addEventListener('change', function() {
+  document.getElementById('tree-email-field').style.display = this.checked ? 'block' : 'none';
+  if (!this.checked) { document.getElementById('tree-email').value = ''; clearErr('tree-email-err'); }
 });
 
 // Checkbox style toggle
@@ -829,15 +816,6 @@ function markInput(id, bad) {
   if (el) el.classList.toggle('error', bad);
 }
 
-// Age check
-function calcAge(dob) {
-  const b = new Date(dob), now = new Date();
-  let age = now.getFullYear() - b.getFullYear();
-  const m = now.getMonth() - b.getMonth();
-  if (m < 0 || (m === 0 && now.getDate() < b.getDate())) age--;
-  return age;
-}
-
 // Form submit
 document.getElementById('waiver-form').addEventListener('submit', function(e) {
   e.preventDefault();
@@ -846,10 +824,6 @@ document.getElementById('waiver-form').addEventListener('submit', function(e) {
   const fields = [
     ['fname', 'First name is required'],
     ['lname', 'Last name is required'],
-    ['ec-name', 'Emergency contact name is required'],
-    ['ec-phone', 'Emergency contact phone is required'],
-    ['print-name', 'Please print your full name'],
-    ['sign-date', 'Date is required'],
   ];
 
   fields.forEach(([id, msg]) => {
@@ -858,30 +832,21 @@ document.getElementById('waiver-form').addEventListener('submit', function(e) {
     else { clearErr(id + '-err'); markInput(id, false); }
   });
 
-  // Email
-  const email = document.getElementById('email').value.trim();
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showErr('email-err', 'Please enter a valid email address'); markInput('email', true); valid = false;
-  } else { clearErr('email-err'); markInput('email', false); }
-
-  // DOB + age
-  const dob = document.getElementById('dob').value;
-  if (!dob) { showErr('dob-err', 'Date of birth is required'); markInput('dob', true); valid = false; }
-  else if (calcAge(dob) < 18) { showErr('dob-err', 'Participants must be 18 or older'); markInput('dob', true); valid = false; }
-  else { clearErr('dob-err'); markInput('dob', false); }
-
-  // Emergency contact relationship
-  const ecRel = document.getElementById('ec-rel').value;
-  if (!ecRel) { showErr('ec-rel-err', 'Please select a relationship'); markInput('ec-rel', true); valid = false; }
-  else { clearErr('ec-rel-err'); markInput('ec-rel', false); }
-
   // Health
   const health = document.querySelector('input[name="health"]:checked');
   if (!health) { showErr('health-err', 'Please indicate your health status'); valid = false; }
   else clearErr('health-err');
 
+  // Tree cert email
+  if (document.getElementById('tree-cert').checked) {
+    const treeEmail = document.getElementById('tree-email').value.trim();
+    if (!treeEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(treeEmail)) {
+      showErr('tree-email-err', 'Please enter a valid email address'); markInput('tree-email', true); valid = false;
+    } else { clearErr('tree-email-err'); markInput('tree-email', false); }
+  }
+
   // Checkboxes
-  const acks = ['ack1','ack2','ack3','ack4'];
+  const acks = ['ack1','ack2'];
   const allAcked = acks.every(id => document.getElementById(id).checked);
   if (!allAcked) { document.getElementById('ack-err').classList.add('show'); valid = false; }
   else document.getElementById('ack-err').classList.remove('show');
@@ -907,23 +872,17 @@ document.getElementById('waiver-form').addEventListener('submit', function(e) {
   const payload = {
     first_name: document.getElementById('fname').value.trim(),
     last_name: document.getElementById('lname').value.trim(),
-    email: document.getElementById('email').value.trim(),
     company: document.getElementById('company').value.trim(),
-    badge_number: document.getElementById('badge').value.trim(),
-    date_of_birth: document.getElementById('dob').value,
-    emergency_contact_name: document.getElementById('ec-name').value.trim(),
-    emergency_contact_relationship: document.getElementById('ec-rel').value,
-    emergency_contact_phone: document.getElementById('ec-phone').value.trim(),
     health_declaration: document.querySelector('input[name="health"]:checked')?.value,
-    health_notes: document.getElementById('health-notes').value.trim(),
-    signed_name: document.getElementById('print-name').value.trim(),
+    health_smell_exemption: document.getElementById('health-smell').checked ? 'Yes' : 'No',
+    health_taste_exemption: document.getElementById('health-taste').checked ? 'Yes' : 'No',
+    tree_certificate_requested: document.getElementById('tree-cert').checked ? 'Yes' : 'No',
+    tree_certificate_email: document.getElementById('tree-email').value.trim(),
     signed_date: document.getElementById('sign-date').value,
     reference: ref,
     signature_provided: hasSig ? 'Yes' : 'No',
     ack_waiver: document.getElementById('ack1').checked ? 'Yes' : 'No',
     ack_media: document.getElementById('ack2').checked ? 'Yes' : 'No',
-    ack_data: document.getElementById('ack3').checked ? 'Yes' : 'No',
-    ack_age: document.getElementById('ack4').checked ? 'Yes' : 'No',
   };
 
   fetch('https://formspree.io/f/mpqkkzkk', {
