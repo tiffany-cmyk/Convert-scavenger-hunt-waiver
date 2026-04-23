@@ -898,19 +898,56 @@ document.getElementById('waiver-form').addEventListener('submit', function(e) {
 
   document.getElementById('error-summary').classList.remove('show');
 
-  // Simulate submission
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
   btn.textContent = 'Submitting…';
 
-  setTimeout(() => {
-    document.getElementById('form-view').style.display = 'none';
-    const success = document.getElementById('success-screen');
-    success.style.display = 'block';
-    const ref = 'WVR-EE26-' + Math.random().toString(36).toUpperCase().slice(2, 8);
-    document.getElementById('success-ref').textContent = 'Reference: ' + ref;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 900);
+  const ref = 'WVR-EE26-' + Math.random().toString(36).toUpperCase().slice(2, 8);
+
+  const payload = {
+    first_name: document.getElementById('fname').value.trim(),
+    last_name: document.getElementById('lname').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    company: document.getElementById('company').value.trim(),
+    badge_number: document.getElementById('badge').value.trim(),
+    date_of_birth: document.getElementById('dob').value,
+    emergency_contact_name: document.getElementById('ec-name').value.trim(),
+    emergency_contact_relationship: document.getElementById('ec-rel').value,
+    emergency_contact_phone: document.getElementById('ec-phone').value.trim(),
+    health_declaration: document.querySelector('input[name="health"]:checked')?.value,
+    health_notes: document.getElementById('health-notes').value.trim(),
+    signed_name: document.getElementById('print-name').value.trim(),
+    signed_date: document.getElementById('sign-date').value,
+    reference: ref,
+    signature_provided: hasSig ? 'Yes' : 'No',
+    ack_waiver: document.getElementById('ack1').checked ? 'Yes' : 'No',
+    ack_media: document.getElementById('ack2').checked ? 'Yes' : 'No',
+    ack_data: document.getElementById('ack3').checked ? 'Yes' : 'No',
+    ack_age: document.getElementById('ack4').checked ? 'Yes' : 'No',
+  };
+
+  fetch('https://formspree.io/f/mpqkkzkk', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => {
+    if (res.ok) {
+      document.getElementById('form-view').style.display = 'none';
+      const success = document.getElementById('success-screen');
+      success.style.display = 'block';
+      document.getElementById('success-ref').textContent = 'Reference: ' + ref;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error('Submission failed');
+    }
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Submit waiver';
+    document.getElementById('error-summary').textContent = 'Submission failed — please try again or find a Convert team member at the desk.';
+    document.getElementById('error-summary').classList.add('show');
+  });
 });
 </script>
 </body>
